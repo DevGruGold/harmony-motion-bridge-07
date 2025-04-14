@@ -12,9 +12,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -47,8 +49,8 @@ const Contact = () => {
     setTimeout(() => {
       console.log("Form submitted:", formData);
       toast({
-        title: "Message Sent!",
-        description: "We'll get back to you as soon as possible.",
+        title: t("Message Sent!", "消息已发送!"),
+        description: t("We'll get back to you as soon as possible.", "我们会尽快回复您。"),
       });
       
       // Reset form
@@ -69,10 +71,12 @@ const Contact = () => {
       <section className="pt-24 pb-12 bg-harmony-blue text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">{t("Contact Us", "联系我们")}</h1>
             <p className="text-xl">
-              Let's start a conversation about how we can work together
-              to create amazing cross-cultural animation.
+              {t(
+                "Let's start a conversation about how we can work together to create amazing cross-cultural animation.",
+                "让我们开始讨论如何共同创作精彩的跨文化动画。"
+              )}
             </p>
           </div>
         </div>
@@ -84,10 +88,12 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div>
-              <h2 className="text-3xl font-bold mb-6 text-harmony-blue">Get In Touch</h2>
+              <h2 className="text-3xl font-bold mb-6 text-harmony-blue">{t("Get In Touch", "联系我们")}</h2>
               <p className="text-lg mb-8">
-                Whether you're interested in partnering with us, have questions about our services,
-                or simply want to learn more about cross-cultural animation collaboration, we'd love to hear from you.
+                {t(
+                  "Whether you're interested in partnering with us, have questions about our services, or simply want to learn more about cross-cultural animation collaboration, we'd love to hear from you.",
+                  "无论您是希望与我们合作，对我们的服务有疑问，还是只是想了解更多关于跨文化动画合作的信息，我们都很乐意听取您的意见。"
+                )}
               </p>
               
               <div className="space-y-6">
@@ -96,8 +102,8 @@ const Contact = () => {
                     <MapPin className="h-6 w-6 text-harmony-blue" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">Location</h3>
-                    <p>La Fortuna, Costa Rica</p>
+                    <h3 className="font-bold text-lg">{t("Location", "位置")}</h3>
+                    <p>{t("La Fortuna, Costa Rica", "哥斯达黎加 拉福图纳")}</p>
                   </div>
                 </div>
                 
@@ -106,7 +112,7 @@ const Contact = () => {
                     <Mail className="h-6 w-6 text-harmony-blue" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">Email</h3>
+                    <h3 className="font-bold text-lg">{t("Email", "电子邮件")}</h3>
                     <a href="mailto:harmonymotionstudios@gmail.com" className="text-harmony-blue hover:underline">
                       harmonymotionstudios@gmail.com
                     </a>
@@ -118,14 +124,14 @@ const Contact = () => {
                     <Phone className="h-6 w-6 text-harmony-blue" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">Phone</h3>
-                    <p>+1 (555) 123-4567</p>
+                    <h3 className="font-bold text-lg">{t("Phone", "电话")}</h3>
+                    <p>+50661500559</p>
                   </div>
                 </div>
               </div>
               
               <div className="mt-12">
-                <h3 className="font-bold text-lg mb-4">Connect With Us</h3>
+                <h3 className="font-bold text-lg mb-4">{t("Connect With Us", "与我们连接")}</h3>
                 <div className="flex space-x-4">
                   <a 
                     href="#" 
@@ -151,15 +157,15 @@ const Contact = () => {
             
             {/* Contact Form */}
             <div className="bg-harmony-light p-8 rounded-lg">
-              <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+              <h2 className="text-2xl font-bold mb-6">{t("Send Us a Message", "给我们发送消息")}</h2>
               <form onSubmit={handleSubmit}>
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block mb-2 font-medium">Name</label>
+                    <label htmlFor="name" className="block mb-2 font-medium">{t("Name", "姓名")}</label>
                     <Input
                       id="name"
                       name="name"
-                      placeholder="Your name"
+                      placeholder={t("Your name", "您的姓名")}
                       value={formData.name}
                       onChange={handleInputChange}
                       required
@@ -167,12 +173,12 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className="block mb-2 font-medium">Email</label>
+                    <label htmlFor="email" className="block mb-2 font-medium">{t("Email", "电子邮件")}</label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="your.email@example.com"
+                      placeholder={t("your.email@example.com", "您的邮箱@example.com")}
                       value={formData.email}
                       onChange={handleInputChange}
                       required
@@ -180,40 +186,42 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="company" className="block mb-2 font-medium">Company</label>
+                    <label htmlFor="company" className="block mb-2 font-medium">{t("Company", "公司")}</label>
                     <Input
                       id="company"
                       name="company"
-                      placeholder="Your company name"
+                      placeholder={t("Your company name", "您的公司名称")}
                       value={formData.company}
                       onChange={handleInputChange}
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="inquiryType" className="block mb-2 font-medium">I'm interested in</label>
+                    <label htmlFor="inquiryType" className="block mb-2 font-medium">
+                      {t("I'm interested in", "我对以下内容感兴趣")}
+                    </label>
                     <Select
                       value={formData.inquiryType}
                       onValueChange={handleSelectChange}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Select an option" />
+                        <SelectValue placeholder={t("Select an option", "选择一个选项")} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="partnership">Partnership Opportunities</SelectItem>
-                        <SelectItem value="services">Services Inquiry</SelectItem>
-                        <SelectItem value="consulting">Cultural Consulting</SelectItem>
-                        <SelectItem value="general">General Information</SelectItem>
+                        <SelectItem value="partnership">{t("Partnership Opportunities", "合作机会")}</SelectItem>
+                        <SelectItem value="services">{t("Services Inquiry", "服务咨询")}</SelectItem>
+                        <SelectItem value="consulting">{t("Cultural Consulting", "文化咨询")}</SelectItem>
+                        <SelectItem value="general">{t("General Information", "一般信息")}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   
                   <div>
-                    <label htmlFor="message" className="block mb-2 font-medium">Message</label>
+                    <label htmlFor="message" className="block mb-2 font-medium">{t("Message", "消息")}</label>
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="Tell us about your project or inquiry"
+                      placeholder={t("Tell us about your project or inquiry", "告诉我们您的项目或咨询")}
                       rows={5}
                       value={formData.message}
                       onChange={handleInputChange}
@@ -228,7 +236,7 @@ const Contact = () => {
                   >
                     {isSubmitting ? (
                       <span className="flex items-center">
-                        Sending...
+                        {t("Sending...", "发送中...")}
                         <svg className="animate-spin ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -236,7 +244,7 @@ const Contact = () => {
                       </span>
                     ) : (
                       <span className="flex items-center">
-                        Send Message
+                        {t("Send Message", "发送消息")}
                         <Send className="ml-2 h-4 w-4" />
                       </span>
                     )}
